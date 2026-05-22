@@ -1,0 +1,256 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --primary: #1e293b;
+  --accent: #dc2626;
+  --enlarge-red: #c41e3a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "Nunito Sans", system-ui, sans-serif;
+  --font-display: "Rubik", system-ui, sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* —— Enlarge 風格動畫 —— */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes galleryFade {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes hazardBlink {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 12px #fbbf24;
+  }
+  50% {
+    opacity: 0.25;
+    box-shadow: none;
+  }
+}
+
+@keyframes lockPop {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes speedPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes relockFlash {
+  0%,
+  90%,
+  100% {
+    opacity: 0;
+  }
+  5%,
+  15% {
+    opacity: 1;
+  }
+}
+
+@keyframes engineBars {
+  0%,
+  100% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes emergencyPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(239, 68, 68, 0);
+  }
+}
+
+@keyframes modalBackdrop {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalPanel {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes megaSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cartCheck {
+  0% {
+    transform: scale(0);
+  }
+  60% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gallery-image-enter {
+  animation: galleryFade 0.35s ease;
+}
+
+.hazard-blink {
+  animation: hazardBlink 0.9s ease-in-out infinite;
+}
+
+.lock-pop {
+  animation: lockPop 1.2s ease-in-out infinite;
+}
+
+.speed-pulse {
+  animation: speedPulse 1s ease-in-out infinite;
+}
+
+.relock-flash {
+  animation: relockFlash 2s ease-in-out infinite;
+}
+
+.engine-idle span {
+  animation: engineBars 0.8s ease-in-out infinite;
+  transform-origin: bottom;
+}
+
+.emergency-unlock {
+  animation: emergencyPulse 1.5s ease infinite;
+}
+
+.modal-backdrop {
+  animation: modalBackdrop 0.25s ease;
+}
+
+.modal-panel {
+  animation: modalPanel 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.mega-backdrop {
+  animation: modalBackdrop 0.2s ease;
+}
+
+.mega-panel {
+  animation: megaSlide 0.3s ease;
+}
+
+.cart-check-pop {
+  animation: cartCheck 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.badge-shine {
+  background: linear-gradient(105deg, #dc2626 0%, #f97316 50%, #dc2626 100%);
+  background-size: 200% auto;
+  animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.product-card-hover {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.product-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
+}
+
+.carousel-slide {
+  will-change: opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
