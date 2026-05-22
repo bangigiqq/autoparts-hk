@@ -74,6 +74,42 @@ AUTH_SECRET=your-production-secret
 
 後端 API 位於 `src/app/api/admin/*`，需管理員 Cookie 權限。
 
+## 上傳到 GitHub（網上瀏覽程式碼）
+
+專案已可在本機用 Git 管理。推送到 GitHub 後，可在瀏覽器查看所有檔案與 README。
+
+### 步驟
+
+1. **建立空倉庫**（不要勾選「Add a README」）  
+   開啟：https://github.com/new?name=autoparts-hk  
+   倉庫名稱建議：`autoparts-hk`，可設為 Public。
+
+2. **推送**（在專案目錄 `workspace/autoparts-hk` 執行）：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/push-to-github.ps1 -Owner 你的GitHub用戶名
+```
+
+若你的帳號是 `bangigiqq`，可直接：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/push-to-github.ps1
+```
+
+或手動：
+
+```bash
+git remote add origin https://github.com/你的用戶名/autoparts-hk.git
+git push -u origin main
+```
+
+3. **在網上開啟**  
+   `https://github.com/你的用戶名/autoparts-hk`
+
+首次 `git push` 時，瀏覽器可能會要求登入 GitHub（建議使用 [Personal Access Token](https://github.com/settings/tokens) 作為密碼）。
+
+> **說明**：GitHub 適合瀏覽與分享**原始碼**。若要讓訪客**實際操作網店**（下單、後台），需另外部署到 Vercel 等主機；本專案使用本機 SQLite，上雲需改用 Turso / Neon 等資料庫。
+
 ## API 端點
 
 - `POST /api/auth/register` — 註冊
