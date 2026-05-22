@@ -2,15 +2,24 @@ import Database from "better-sqlite3";
 import path from "path";
 import fs from "fs";
 
-const dataDir = path.join(process.cwd(), "data");
-if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+/** Vercel 等 serverless 環境僅 /tmp 可寫入 */
+function resolveDataDir() {
+  if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
+    return path.join("/tmp", "autoparts-hk-data");
+  }
+  return path.join(process.cwd(), "data");
+}
 
-const dbPath = path.join(dataDir, "shop.db");
+function getDbPath() {
+  const dataDir = resolveDataDir();
+  if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+  return path.join(dataDir, "shop.db");
+}
 
 const globalForDb = globalThis as typeof globalThis & { __db?: Database.Database };
 
 function createDb() {
-  const db = new Database(dbPath);
+  const db = new Database(getDbPath());
   db.pragma("journal_mode = WAL");
   db.pragma("foreign_keys = ON");
   return db;

@@ -108,7 +108,19 @@ git push -u origin main
 
 首次 `git push` 時，瀏覽器可能會要求登入 GitHub（建議使用 [Personal Access Token](https://github.com/settings/tokens) 作為密碼）。
 
-> **說明**：GitHub 適合瀏覽與分享**原始碼**。若要讓訪客**實際操作網店**（下單、後台），需另外部署到 Vercel 等主機；本專案使用本機 SQLite，上雲需改用 Turso / Neon 等資料庫。
+## 線上預覽（Vercel）
+
+1. 打開 https://vercel.com/new  
+2. **Import** 倉庫 `bangigiqq/autoparts-hk`  
+3. Framework 選 **Next.js**（預設即可）  
+4. Environment Variables 新增：`AUTH_SECRET` = 任意隨機長字串  
+5. 按 **Deploy**，約 2–3 分鐘後會得到 `https://xxx.vercel.app` 預覽網址  
+
+本專案已設定在 Vercel 使用 `/tmp` 存放 SQLite（每次冷啟動會重新 seed 示範資料，適合預覽）。
+
+示範帳號與本機相同（`admin@xinrong.hk` / `admin1234`）。
+
+> GitHub 適合看**程式碼**；Vercel 適合**實際逛網站**。
 
 ## API 端點
 
